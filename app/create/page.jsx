@@ -1,0 +1,37 @@
+"use client";
+import React, { useState } from 'react';
+import LogoTitle from './_components/LogoTitle';
+import { Button } from '@/components/ui/button';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+
+const CreateLogo = () => {
+    const [step, setStep] = useState(1);
+    const [formData, setFormData] = useState({}); //This Holds the form data
+
+    // to handle input changes dynamically
+    const onHandleInputChange = (field, value) => {
+        setFormData({ ...formData, [field]: value });
+    };
+
+    return (
+        <div className="mt-28 p-10 border rounded-xl 2xl:mx-72">
+            {/* Conditional rendering steps based */}
+            {step == 1 ? (
+                <LogoTitle onHandleInputChange={(v) => onHandleInputChange('title', v)} />
+            ) : null}
+            
+            <div className="flex items-center justify-between mt-10">
+                {step != 1 && (
+                    <Button onClick={() => setStep(step - 1)} variant="outline">
+                        <ArrowLeft /> Previous
+                    </Button>
+                )}
+                <Button onClick={() => setStep(step + 1)}>
+                    <ArrowRight /> Continue
+                </Button>
+            </div>
+        </div>
+    );
+};
+
+export default CreateLogo;

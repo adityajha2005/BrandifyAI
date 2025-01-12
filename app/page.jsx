@@ -9,11 +9,9 @@ export default function Home() {
   return (
     <div>
       <StrictMode>
-      <Header />
-      <div className="px-10 lg:px-32 xl:px-48 2xl:xl-56 p-4">
-        
+      {/* <div className="px-10 lg:px-32 xl:px-48 2xl:xl-56 p-4"> */}
       <Hero />
-      </div>
+      {/* </div> */}
       </StrictMode>
     </div>
   );

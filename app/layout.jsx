@@ -1,6 +1,6 @@
 import { Host_Grotesk } from "next/font/google";
 import "./globals.css";
-import provider from "./provider";
+import Provider from "./provider";
 
 
 const host_Grotesk = Host_Grotesk({
@@ -13,9 +13,9 @@ export default function RootLayout({ children }) {
       <body
       className={host_Grotesk.classname}
       >
-        <provider>
+        <Provider>
         {children}
-        </provider>
+        </Provider>
       </body>
     </html>
   );

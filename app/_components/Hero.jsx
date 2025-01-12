@@ -1,12 +1,13 @@
 "use client";
-
-// Hero.jsx
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { HeroHighlight, Highlight } from "@/components/ui/hero-highlight";
 import { Button } from "@/components/ui/button";
 import Lookup from "../_data/Lookup";
+import Link from "next/link";
 
 function Hero() {
+  const[logotitle,setLogotitle] = useState();
   return (
     <HeroHighlight>
       <motion.h1
@@ -34,8 +35,11 @@ function Hero() {
         <input
           placeholder={Lookup.InputTitlePlaceholder}
           className="p-3 border rounded-md w-full shadow-md"
+          onChange={(e)=>setLogotitle(e.target.value)}
         />
+        <Link href={'/create?title='+logotitle}>
         <Button className="w-full p-6">Get Started!</Button>
+        </Link>
       </div>
     </HeroHighlight>
   );
