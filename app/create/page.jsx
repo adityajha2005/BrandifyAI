@@ -7,6 +7,7 @@ import LogoDesigns from './_components/LogoDesigns';
 import LogoIdea from './_components/LogoIdea';
 import LogoDesc from './_components/LogoDesc';
 import LogoColorPalatte from './_components/LogoColorPalatte';
+import PricingModel from './_components/PricingModel';
 const CreateLogo = () => {
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({}); //This Holds the form data
@@ -21,15 +22,18 @@ const CreateLogo = () => {
         <div className="mt-28 p-10 border rounded-xl 2xl:mx-72">
             {/* Conditional rendering steps based */}
             {step == 1 ? 
-                <LogoTitle onHandleInputChange={(v) => onHandleInputChange('title', v)} />
+                <LogoTitle onHandleInputChange={(v) => onHandleInputChange('title', v)} formData={formData}/>
             : step==2 ?
-                <LogoDesc onHandleInputChange={(v) => onHandleInputChange('desc', v)} />
+                <LogoDesc onHandleInputChange={(v) => onHandleInputChange('desc', v)} formData={formData} />
             : step==3 ?
-                <LogoColorPalatte onHandleInputChange={(v) => onHandleInputChange('palette', v)} />
+                <LogoColorPalatte onHandleInputChange={(v) => onHandleInputChange('palette', v)} formData={formData} />
             : step==4 ?
-                <LogoDesigns onHandleInputChange={(v) => onHandleInputChange('design', v)} />
+                <LogoDesigns onHandleInputChange={(v) => onHandleInputChange('design', v)} formData={formData} />
             : step==5 ?
-                <LogoIdea onHandleInputChange={(v) => onHandleInputChange('idea', v)} />:
+                <LogoIdea onHandleInputChange={(v) => onHandleInputChange('idea', v)} formData={formData} />
+            : step==6?
+                <PricingModel  onHandleInputChange={(v) => onHandleInputChange('pricing', v)} formData={formData} />
+            :
             null
             }
             

@@ -12,5 +12,31 @@ export default {
     LogoDesignTitle: 'Design Your Logo',
     LogoDesignDesc: 'Customize your logo’s font, style, and layout for a unique identity.',
     LogoColorPaletteTitle: 'Choose a Color Palette',
-    LogoColorPaletteDesc: 'Select a color palette that matches your brand’s theme and values.',
+    LogoColorPaletteDesc: 'Pick the colors that reflect your brand’s theme and values.',
+    LogoPricingTitle: 'Select your AI Model Plan',
+    LogoPricingDesc: 'Choose a plan that suits your needs and budget.',
+    pricingOption: [
+        {
+            title: 'Free',
+            icon: '/free.png',
+            features: [
+                '➤ Generate unlimited logos for free',
+                '➤ Longer wait times',
+                '➤ Wait time: 30 seconds to 3 minutes',
+                '➤ Limited Design Options and Quality',
+            ],
+            button: 'Generate Free',
+        },
+        {
+            title: 'Premium',
+            icon: '/thunder.png',// Add your premium plan icon here
+            features: [
+                '➤ Generate unlimited logos',
+                '➤ Shorter wait times',
+                '➤ Wait time: less than 10 seconds',
+                '➤ High-Quality Design Options',
+            ],
+            button: 'Generate Premium',
+        },
+    ],
 };
