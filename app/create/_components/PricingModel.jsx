@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useUser } from "@clerk/nextjs";
 import { SignInButton } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const PricingModel = ({ formData }) => {
     const { user } = useUser();
@@ -62,17 +63,21 @@ const PricingModel = ({ formData }) => {
                             ))}
                         </div>
                         <div className="mt-5">
-                            {user ? (
+                            {user ? 
+                            <Link href={'/generate-logo?type='+pricing.title}>
+                            (
                                 <Button onClick={() => handlePricingClick(pricing.title)}>
                                     {pricing.button}
                                 </Button>
-                            ) : (
+                            )
+                                </Link>
+                             : (
                                 <SignInButton
                                     mode="modal"
                                     aftersigninurl={`/generate-logo?type=${pricing.title}`}
                                     // redirectUrl={`/generate-logo?type=${pricing.title}`}
                                 >
-                                    <Button>{pricing.button}</Button>
+                                    <Button className="mt-5">{pricing.button}</Button>
                                 </SignInButton>
                             )}
                         </div>
