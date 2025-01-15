@@ -1,10 +1,21 @@
-import React from 'react'
+"use client"
+import React, { useEffect } from 'react'
 import Header from './_components/Header'
+import axios from 'axios'
+import { useUser } from '@clerk/nextjs'
 
 const Provider = ({children}) => {
     //saving user data to database
-    const checkUserAuth = () => {
-
+    const{user} = useUser();
+    useEffect(()=>{
+        user&&CheckUserAuth();
+    },[user])
+    const CheckUserAuth = async() => {
+      const result = await axios.post('/api/user',{
+        userName : user?.fullName,
+        userEmail:user?.primaryEmailAddress?.emailAddress 
+      });
+      console.log(result.data);
     }
   return (
     <div>
