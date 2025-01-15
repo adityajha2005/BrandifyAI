@@ -65,12 +65,10 @@ const PricingModel = ({ formData }) => {
                         <div className="mt-5">
                             {user ? 
                             <Link href={'/generate-logo?type='+pricing.title}>
-                            (
                                 <Button onClick={() => handlePricingClick(pricing.title)}>
                                     {pricing.button}
                                 </Button>
-                            )
-                                </Link>
+                            </Link>
                              : (
                                 <SignInButton
                                     mode="modal"

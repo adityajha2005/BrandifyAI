@@ -1,18 +1,21 @@
-// import { AIDesignIdea } from "@/configs/AiModel";
-import { AIDesignIdea } from "@/app/configs/AiModel";
+import { startChat } from "../../configs/AiModel";
 import { NextResponse } from "next/server";
 
-export async function POST(req) {
+export async function POST(request) {
+  try {
+    const { prompt } = await request.json();
     
-    const {prompt}=await req.json();
-
-    try{
-        const result=await AIDesignIdea.sendMessage(prompt)
-        return NextResponse.json(JSON.parse(result.response.text()))
-    }
-    catch(e)
-    {
-        return NextResponse.json({error:e})
-    }
-
+    const response = await startChat(prompt);
+    
+    return NextResponse.json({ 
+      success: true, 
+      result: response 
+    });
+  } catch (error) {
+    console.error("Route Error:", error);
+    return NextResponse.json({ 
+      success: false, 
+      error: error.message 
+    }, { status: 500 });
+  }
 }
