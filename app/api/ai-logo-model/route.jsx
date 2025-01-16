@@ -22,9 +22,22 @@ export async function POST(req) {
       const responseText = AIPromptResult.response.text();
       console.log("Raw AI Response:", responseText);
 
+      let parsedResponse;
+      try {
+        parsedResponse = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("Parse error:", parseError);
+        // If parsing fails, wrap the response in the expected format
+        parsedResponse = { prompt: responseText };
+      }
+
+      if (!parsedResponse.prompt) {
+        throw new Error("Missing prompt in response");
+      }
+
       return NextResponse.json({ 
         success: true,
-        result: responseText 
+        result: parsedResponse.prompt 
       });
 
     } catch (error) {
@@ -32,7 +45,8 @@ export async function POST(req) {
       return NextResponse.json(
         { 
           error: "AI processing failed", 
-          details: error.message
+          details: error.message,
+          stack: error.stack 
         },
         { status: 500 }
       );

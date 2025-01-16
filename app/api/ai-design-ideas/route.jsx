@@ -1,11 +1,11 @@
-import { startChat } from "../../configs/AiModel";
+// import { startChat } from "../../configs/AiModel";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
   try {
     const { prompt } = await request.json();
     
-    const response = await startChat(prompt);
+    // const response = await startChat(prompt);
     
     return NextResponse.json({ 
       success: true, 
