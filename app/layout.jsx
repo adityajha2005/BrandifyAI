@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
       <body
       className={host_Grotesk.classname}
       >
-        <Provider>
+        <Provider >
         {children}
         </Provider>
       </body>

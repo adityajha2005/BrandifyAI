@@ -4,6 +4,7 @@ import { UserDetailContext } from "../_context/UserDetailContext";
 import Prompt from "../_data/Prompt";
 import axios from "axios";
 import { Loader2 } from "lucide-react";
+import Image from "next/image";
 
 const GenerateLogo = () => {
   const { userDetail } = useContext(UserDetailContext);
@@ -45,7 +46,7 @@ const GenerateLogo = () => {
     try {
       setIsLoading(true);
       setError(null);
-      
+
       const PROMPT = Prompt.LOGO_PROMPT
         .replace("{logoTitle}", data?.title || "")
         .replace("{logoDesc}", data?.desc || "")
@@ -56,8 +57,8 @@ const GenerateLogo = () => {
 
       console.log("Sending prompt:", PROMPT);
 
-      const result = await axios.post('/api/ai-logo-model', {
-        prompt: PROMPT
+      const result = await axios.post("/api/ai-logo-model", {
+        prompt: PROMPT,
       });
 
       console.log("API Response:", result.data);
@@ -70,9 +71,9 @@ const GenerateLogo = () => {
             {
               headers: {
                 Authorization: `Bearer ${process.env.NEXT_PUBLIC_HUGGING_FACE_KEY}`,
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
               },
-              responseType: "arraybuffer"
+              responseType: "arraybuffer",
             }
           );
 
@@ -84,7 +85,7 @@ const GenerateLogo = () => {
           throw new Error("Failed to generate image from prompt");
         }
       } else {
-        throw new Error(result?.data?.error || 'Failed to generate logo');
+        throw new Error(result?.data?.error || "Failed to generate logo");
       }
     } catch (error) {
       console.error("Error:", error.response?.data || error);
@@ -95,35 +96,51 @@ const GenerateLogo = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Generate Logo</h2>
-      
+    <div className="container mx-auto p-6 bg-gray-100 min-h-screen">
+      <h2 className="text-4xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600 mb-8">
+        Generate Your Logo
+      </h2>
+
       {error && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-          {error}
+        <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded mb-6">
+          <p>{error}</p>
         </div>
       )}
 
       {isLoading && (
-        <div className="flex justify-center items-center py-8">
-          <Loader2 className="animate-spin h-8 w-8" />
-          <span className="ml-2">Generating your logo...</span>
+        <div className="flex flex-col justify-center items-center py-16">
+          {/* <Loader2 className="animate-spin h-16 w-16 text-blue-500 mb-4" /> */}
+          <Image src="/loading.gif" alt="Loading animation" width={120} height={120} />
+          <span className="mt-4 text-lg font-medium text-gray-700">
+            Generating your logo, please wait...
+            <h2 className="text-sm text-gray-500 flex items-center justify-center mt-2">
+            ETA: <span className="font-semibold text-gray-800 ml-1">1m</span>
+            </h2>
+          </span>
         </div>
       )}
 
       {generatedImage && (
-        <div className="mt-4">
-          <img 
-            src={generatedImage} 
-            alt="Generated Logo" 
-            className="max-w-md mx-auto rounded-lg shadow-lg" 
+        <div className="mt-8 text-center">
+          <img
+            src={generatedImage}
+            alt="Generated Logo"
+            className="max-w-md mx-auto rounded-lg shadow-md"
           />
+          <a
+            href={generatedImage}
+            download="generated-logo.png"
+            className="mt-6 inline-block px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-colors"
+          >
+            Download Logo
+          </a>
         </div>
       )}
 
-      {formData?.desc && !isLoading && !generatedImage && (
-        <div className="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded">
-          Preparing to generate logo...
+      {!isLoading && !generatedImage && formData?.desc && (
+        <div className="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 rounded mt-6">
+          Preparing to generate your logo...
+          <h2>ETA: 1m</h2>
         </div>
       )}
     </div>
