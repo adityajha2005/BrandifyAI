@@ -1,16 +1,11 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-// Add this debug log to verify the API key is available
-if (!process.env.NEXT_PUBLIC_GEMINI_API_KEY) {
-  console.error('GEMINI API KEY is not defined in environment variables');
-}
-
+// Initialize the Google AI model
 const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY);
 
+// Export the startChat function
 export const startChat = async (prompt) => {
   try {
-    console.log('Starting AI generation with prompt:', prompt); // Debug log
-    
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
     
     const result = await model.generateContent({
@@ -24,7 +19,6 @@ export const startChat = async (prompt) => {
     });
 
     const response = await result.response;
-    console.log('AI Response:', response.text()); // Debug log
     return response.text();
   } catch (error) {
     console.error("AI Model Error:", error);
@@ -32,4 +26,5 @@ export const startChat = async (prompt) => {
   }
 };
 
+// Export as default and named export
 export default { startChat };
