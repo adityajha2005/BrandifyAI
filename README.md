@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# AI Logo Generator
+
+An intelligent logo generation platform that creates unique logos using AI technology, powered by Next.js, Clerk Authentication, and Gemini AI.
+
+## Features
+
+- 🎨 AI-powered logo generation
+- 🔐 Secure authentication with Clerk
+- 💫 Interactive logo customization
+- 🎯 Multiple design options
+- 💼 Free and Premium tiers
+- 📱 Responsive design
+
+## Tech Stack
+
+- **Frontend:** Next.js 14, React, Tailwind CSS
+- **Authentication:** Clerk
+- **AI Services:** 
+  - Google Gemini AI (Text Generation)
+  - Hugging Face (Image Generation)
+- **Styling:** Shadcn UI Components
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository:
+```bash
+git clone https://github.com/adityajha2005/BrandifyAI
+cd ai-logo-generator
+```
 
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Set up environment variables:
+Create a `.env.local` file in the root directory with the following variables:
+```env
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
+NEXT_PUBLIC_GEMINI_API_KEY=your_gemini_api_key
+NEXT_PUBLIC_HUGGING_FACE_KEY=your_hugging_face_key
+```
+
+4. Run the development server:
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+ai-logo-generator/
+├── app/
+│   ├── _components/      # Shared components
+│   ├── _data/           # Static data and configurations
+│   ├── api/             # API routes
+│   ├── configs/         # Configuration files
+│   ├── create/          # Logo creation flow
+│   └── generate-logo/   # Logo generation page
+├── components/          # UI components
+├── public/             # Static assets
+└── styles/            # Global styles
+```
 
-## Learn More
+## Key Features
 
-To learn more about Next.js, take a look at the following resources:
+- **Logo Design Flow**
+  - Title and description input
+  - Design style selection
+  - AI-powered idea generation
+  - Pricing tier selection
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Authentication**
+  - Secure sign-up/sign-in
+  - Protected routes
+  - User profile management
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **AI Integration**
+  - Text prompt generation with Gemini AI
+  - Image generation with Hugging Face
 
-## Deploy on Vercel
+## Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- [Next.js](https://nextjs.org/)
+- [Clerk](https://clerk.dev/)
+- [Google Gemini AI](https://ai.google.dev/)
+- [Hugging Face](https://huggingface.co/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Shadcn UI](https://ui.shadcn.com/)
