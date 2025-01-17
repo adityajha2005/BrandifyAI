@@ -15,22 +15,33 @@ function LogoIdea({formData,onHandleInputChange}) {
   },[])
 
   const generateLogoDesignIdea=async()=>{
-   
-    setLoading(true)
-    const PROMPT=Prompt.DESIGN_IDEA_PROMPT
-    .replace('{logoType}',formData?.design.title)
-    .replace('{logoTitle}',formData.title)
-    .replace('{logoDesc}',formData.desc)
-    .replace('{logoPrompt}',formData.design.prompt)
+    try {
+      setLoading(true)
+      const PROMPT=Prompt.DESIGN_IDEA_PROMPT
+      .replace('{logoType}',formData?.design.title)
+      .replace('{logoTitle}',formData.title)
+      .replace('{logoDesc}',formData.desc)
+      .replace('{logoPrompt}',formData.design.prompt)
 
-    // console.log(PROMPT);
-    const result=await axios.post('/api/ai-design-ideas',{
-      prompt:PROMPT
-    })
-
-    console.log(result.data)
-   !ideas&&setIdeas(result.data.ideas);
-    setLoading(false);
+      console.log('Sending prompt:', PROMPT);
+      
+      const result = await axios.post('/api/ai-logo-model', {
+        prompt: PROMPT
+      });
+      
+      console.log('Response:', result.data);
+      
+      if (result.data.success) {
+        return result.data.result;
+      } else {
+        throw new Error(result.data.error || 'Failed to generate logo idea');
+      }
+    } catch (error) {
+      console.error('Error in generateLogoDesignIdea:', error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (

@@ -16,7 +16,7 @@ const LogoTitle = ({onHandleInputChange,formData}) => {
         />
         <input type='text' placeholder={Lookup.InputTitlePlaceholder}
         className='p-4 border rounded-lg mt-5 w-full'
-        defaultValue={title}
+        defaultValue=""
         onChange={(e)=>onHandleInputChange(e.target.value)}
         />
     </div>
