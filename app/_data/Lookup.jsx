@@ -29,14 +29,14 @@ export default {
         },
         {
             title: 'Premium',
-            icon: '/thunder.png',// Add your premium plan icon here
+            icon: '/thunder.png',
             features: [
                 '➤ Generate unlimited logos',
                 '➤ Shorter wait times',
                 '➤ Wait time: less than 10 seconds',
                 '➤ High-Quality Design Options',
             ],
-            button: 'Generate Premium',
+            button: 'Under Development ',
         },
     ],
 };

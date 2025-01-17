@@ -6,10 +6,20 @@ const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY);
 // Export the startChat function
 export const startChat = async (prompt) => {
   try {
+    console.log('Input prompt:', prompt); // Debug log
+    
+    // Ensure prompt is a string
+    if (typeof prompt !== 'string') {
+      throw new Error('Prompt must be a string');
+    }
+
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
     
     const result = await model.generateContent({
-      contents: [{ role: "user", parts: [{ text: prompt }] }],
+      contents: [{ 
+        role: "user", 
+        parts: [{ text: prompt }]
+      }],
       generationConfig: {
         temperature: 0.9,
         topK: 40,

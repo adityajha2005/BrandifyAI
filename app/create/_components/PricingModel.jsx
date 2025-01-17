@@ -14,25 +14,21 @@ const PricingModel = ({ formData }) => {
     const router = useRouter();
 
     const handlePricingClick = (pricingType) => {
-        if (user) {
+        if (user && pricingType === 'Free') {
             router.push(`/generate-logo?type=${pricingType}`);
         }
     };
 
     useEffect(() => {
         if (typeof window !== "undefined") {
-            if (formData?.design.title) {
+            if (formData?.design?.title) {
                 try {
                     console.log("Storing formData:", formData);
                     localStorage.setItem("formData", JSON.stringify(formData));
                 } catch (error) {
                     console.error("Error storing formData:", error);
                 }
-            } else {
-                console.log("formData or formData.title is missing.");
             }
-        } else {
-            console.log("window is not defined.");
         }
     }, [formData]);
 
@@ -63,19 +59,34 @@ const PricingModel = ({ formData }) => {
                             ))}
                         </div>
                         <div className="mt-5">
-                            {user ? 
-                            <Link href={'/generate-logo?type='+pricing.title}>
-                                <Button onClick={() => handlePricingClick(pricing.title)}>
-                                    {pricing.button}
-                                </Button>
-                            </Link>
-                             : (
+                            {user ? (
+                                pricing.title === 'Free' ? (
+                                    <Link href={`/generate-logo?type=${pricing.title}`}>
+                                        <Button onClick={() => handlePricingClick(pricing.title)}>
+                                            {pricing.button}
+                                        </Button>
+                                    </Link>
+                                ) : (
+                                    <Button 
+                                        disabled
+                                        className="mt-5 cursor-not-allowed"
+                                        title="Coming Soon"
+                                    >
+                                        Coming Soon
+                                    </Button>
+                                )
+                            ) : (
                                 <SignInButton
                                     mode="modal"
                                     aftersigninurl={`/generate-logo?type=${pricing.title}`}
-                                    // redirectUrl={`/generate-logo?type=${pricing.title}`}
                                 >
-                                    <Button className="mt-5">{pricing.button}</Button>
+                                    <Button 
+                                        className="mt-5"
+                                        disabled={pricing.title !== 'Free'}
+                                        title={pricing.title !== 'Free' ? 'Coming Soon' : ''}
+                                    >
+                                        {pricing.title !== 'Free' ? 'Coming Soon' : pricing.button}
+                                    </Button>
                                 </SignInButton>
                             )}
                         </div>

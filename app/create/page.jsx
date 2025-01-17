@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import { Suspense } from 'react';
 import LogoTitle from './_components/LogoTitle';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
@@ -19,6 +20,8 @@ const CreateLogo = () => {
     };
 
     return (
+        <Suspense fallback={<div>Loading...</div>}>
+
         <div className="mt-28 p-10 border rounded-xl 2xl:mx-72">
             {/* Conditional rendering steps based */}
             {step == 1 ? 
@@ -48,6 +51,8 @@ const CreateLogo = () => {
                 </Button>
             </div>
         </div>
+        </Suspense>
+
     );
 };
 
